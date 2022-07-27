@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import Dice from "./Components/Dice.js";
+import clsx from "clsx";
 
 export default function App() {
   const nbDices = 10;
@@ -8,6 +9,27 @@ export default function App() {
   const [dices, setDices] = React.useState([]);
   const [hasStarted, setHasStarted] = React.useState(false);
   const [hasWon, setHasWon] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+
+
+  React.useEffect(()=>{
+    handleResize()
+  },[])
+
+  function handleResize(){
+    if(window.innerWidth >= 670){
+      setIsMobile(false)
+    } else {
+      setIsMobile(true)
+    }
+  }
+
+
+  window.addEventListener("resize", handleResize);
+
+
+
 
   //Console.logging the values of the dices when they change.
   React.useEffect(() => {
@@ -73,27 +95,35 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1 className="title">Tenzies!</h1>
-      <main>
-        <h1>How to play</h1>
-        <p className="instructions">
-          Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls.
-        </p>
+      <h1 className={clsx({"title--desktop":!isMobile, "title--mobile":isMobile})}>Tenzies!</h1>
+      <div className={clsx({"playboard--desktop":!isMobile, "playboard--mobile":isMobile})}>
+        <div>
+          <h1 style={{textAlign:"center", marginBottom:"10px"}}>How to play</h1>
+          <p className={clsx({"instructions--desktop":!isMobile, "instructions--mobile":isMobile})}>
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>
+        </div>
 
         {hasStarted && (
-          <Dice dices={dices} onClick={freezeDice} hasWon={hasWon} />
+          <Dice dices={dices} onClick={freezeDice} hasWon={hasWon} isMobile={isMobile}/>
         )}
 
         <button
           onClick={hasStarted ? (hasWon ? playAgain : rollTheDice) : startGame}
-          className={
-            hasStarted ? (hasWon ? "playAgain" : "rerollButton") : "startButton"
-          }
+          className={clsx({
+            "ingameButton--desktop":!isMobile,
+            "ingameButton--mobile":isMobile,
+            "playAgain": (hasStarted && hasWon), 
+            "rerollButton": (hasStarted && !hasWon),
+            "startButton": !hasStarted
+          })}
         >
           {hasStarted ? (hasWon ? "Play again!" : "Reroll") : "Start"}
         </button>
-      </main>
+      </div>
     </div>
   );
 }
+
+

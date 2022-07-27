@@ -9,7 +9,7 @@ body {
   
 }
 
-.title {
+.title--desktop {
   color:white;
   font-family: 'Josefin Sans','Inter', Arial, sans-serif;
   text-align: center;
@@ -19,7 +19,21 @@ body {
 
 }
 
-main {
+.title--mobile {
+  color:white;
+  font-family: 'Josefin Sans','Inter', Arial, sans-serif;
+  text-align: center;
+  font-size: 50px;
+  user-select: none;
+  margin-top:-20px;
+  margin-bottom:10px;
+}
+
+.instructions--mobile{
+  text-align:center;
+}
+
+.playboard--desktop {
   margin:0 auto;
   background-color: #e2e1e1;
   padding: 20px 40px;
@@ -29,25 +43,75 @@ main {
   display:flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   overflow:hidden;
 }
 
-
-.Dices {
+.playboard--mobile {
+  margin:0 auto;
+  background-color: #e2e1e1;
+  padding: 20px 10px;
+  min-height:410px;
+  max-width:720px;
+  border-radius:5px;
   display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width:100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow:hidden;
 }
 
-.dice {
-  margin:50px 5px 50px;
+.Dices--desktop {
+  border:2px solid red;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: 
+    "d d d d d"
+    "d d d d d";
+    row-gap:55px;
+    column-gap:45px;
+}
+
+.Dices--mobile {
+  display:grid;
+  grid-auto-flow:column;
+  row-gap:5vw;
+  column-gap:10vw;
+  margin-top:10px;
+  margin-bottom:20px;
+
+ 
+}
+
+.dice--mobile:nth-child(2n + 1){
+  grid-column:1
+}
+.dice--mobile:nth-child(2n + 2){
+  grid-column:2
+}
+
+
+.dice--desktop {
   text-align: center;
   font-size: 40px;
   font-family: 'Inter', Arial, sans-serif;
   width: 50px;
   padding:10px;
+  border-radius:10px;
+  border: solid 2px black;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  background-color:#ffffff;
+  user-select: none;
+}
+
+.dice--mobile {
+  text-align: center;
+  font-size: 35px;
+  font-family: 'Inter', Arial, sans-serif;
+  width: 50px;
+  padding:2px;
   border-radius:10px;
   border: solid 2px black;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
@@ -72,14 +136,22 @@ button {
   padding:5px 20px
 }
 
-.rerollButton {
+.ingameButton--desktop {
   margin-bottom:20px;
+
+}
+
+.ingameButton--mobile {
+  margin-bottom:5px;
+
+}
+
+.rerollButton {
   font-size:30px;
 
 }
 
 .rerollButton:hover {
-  margin-bottom:20px;
   font-size:30px;
   background-color:rgb(253, 80, 80)
 
